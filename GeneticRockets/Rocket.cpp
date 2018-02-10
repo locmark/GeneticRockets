@@ -41,7 +41,8 @@ void Rocket::CalcScore()
 	//score = 1000/CalcDistance(this->position, target);
 	float distance = CalcDistance(this->position, target);
 	score = Map(distance, 0, 1000, 100, 1);
-
+	if (crashed)
+		score /= 10;
 }
 
 void Rocket::ApplyForce(sf::Vector2f force)

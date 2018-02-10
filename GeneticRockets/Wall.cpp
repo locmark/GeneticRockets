@@ -2,15 +2,21 @@
 #include "Wall.h"
 
 
-Wall::Wall() :
-	rect(sf::Vector2f((int)width, height))
+Wall::Wall(float x, float y, float width, float height) :
+	rect(sf::Vector2f(width, height))
 {
-	rect.setPosition(sf::Vector2f(this->x, this->y));
+	_x = x;
+	_y = y;
+	_width = width;
+	_height = height;
+	rect.setPosition(sf::Vector2f(_x, _y));
 }
+
+
 
 CollisionBox Wall::GetCollisionBox()
 {
-	return CollisionBox();
+	return CollisionBox(_x, _y, _width, _height);
 }
 
 void Wall::Draw(sf::RenderWindow & window)

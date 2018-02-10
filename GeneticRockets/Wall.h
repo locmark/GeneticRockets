@@ -6,14 +6,14 @@
 class Wall
 {
 public:
-	Wall();
+	Wall(float x, float y, float width, float height);
 	CollisionBox GetCollisionBox();
 	void Draw(sf::RenderWindow & window);
 private:
-	float x;
-	float y;
-	float height;
-	float width;
+	float _x;
+	float _y;
+	float _height;
+	float _width;
 
 	sf::RectangleShape rect;
 };
