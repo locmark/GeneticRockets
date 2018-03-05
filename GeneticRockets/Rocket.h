@@ -33,6 +33,7 @@ private:
 	DNA dna;
 	int score;
 	bool crashed = false;
+	bool won = false;
 
 	sf::RectangleShape rect;
 };

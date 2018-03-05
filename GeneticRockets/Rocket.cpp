@@ -40,9 +40,12 @@ void Rocket::CalcScore()
 {
 	//score = 1000/CalcDistance(this->position, target);
 	float distance = CalcDistance(this->position, target);
-	score = Map(distance, 0, 1000, 100, 1);
+	//score = Map(distance, 0, 1000, 100, 1);
+	score = 10000 / distance;
 	if (crashed)
-		score /= 10;
+		score /= 50;
+	if (won)
+		score *= 10;
 }
 
 void Rocket::ApplyForce(sf::Vector2f force)
@@ -53,12 +56,16 @@ void Rocket::ApplyForce(sf::Vector2f force)
 
 void Rocket::Update(int count)
 {
-	if (position.x < 0 || position.x > SCREEN_WIDTH ||
-		position.y < 0 || position.y > SCREEN_HEIGHT)
-		crashed = true;
-
-	if (!crashed)
+	if (!crashed && !won)
 	{
+		if (position.x < 0 || position.x > SCREEN_WIDTH ||
+			position.y < 0 || position.y > SCREEN_HEIGHT)
+			crashed = true;
+
+		float distance = CalcDistance(this->position, target);
+		if (distance < 10)
+			won = true;
+
 		ApplyForce(dna.GetForce(count));
 		//physics
 		this->speed += this->acceleration;
